@@ -16,5 +16,6 @@ public interface UrlFilterDao {
     public void deleteUrlFilter(Long urlFilterId);
 
     public UrlFilter findOne(Long urlFilterId);
+    public UrlFilter findOneByUrl(String url);
     public List<UrlFilter> findAll();
 }

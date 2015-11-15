@@ -50,6 +50,11 @@ public class UrlFilterServiceImpl implements UrlFilterService {
     }
 
     @Override
+    public UrlFilter findOneByUrl(String url) {
+        return urlFilterDao.findOneByUrl(url)==null?urlFilterDao.findOneByUrl(url+"/**"):urlFilterDao.findOneByUrl(url);
+    }
+
+    @Override
     public List<UrlFilter> findAll() {
         return urlFilterDao.findAll();
     }

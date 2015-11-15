@@ -11,6 +11,7 @@ public class UrlFilter implements Serializable {
     private Long id;
     private String name; //url名称/描述
     private String url; //地址
+    private Integer method;
     private String roles; //所需要的角色，可省略
     private String permissions; //所需要的权限，可省略
 
@@ -36,6 +37,14 @@ public class UrlFilter implements Serializable {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getMethod() {
+        return method;
+    }
+
+    public void setMethod(Integer method) {
+        this.method = method;
     }
 
     public String getRoles() {
@@ -77,6 +86,7 @@ public class UrlFilter implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", method = "+ method +'\'' +
                 ", roles='" + roles + '\'' +
                 ", permissions='" + permissions + '\'' +
                 '}';

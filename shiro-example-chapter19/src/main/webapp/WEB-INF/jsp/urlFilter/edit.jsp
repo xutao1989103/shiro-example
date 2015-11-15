@@ -28,6 +28,11 @@
         </div>
 
         <div class="form-group">
+            <form:label path="method">METHOD：</form:label>
+            <form:input path="method"/>
+        </div>
+
+        <div class="form-group">
             <form:label path="roles">角色列表：</form:label>
             <form:input path="roles"/>
         </div>

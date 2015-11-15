@@ -25,7 +25,7 @@ public class UrlFilterDaoImpl implements UrlFilterDao {
     private JdbcTemplate jdbcTemplate;
     
     public UrlFilter createUrlFilter(final UrlFilter urlFilter) {
-        final String sql = "insert into sys_url_filter(name, url, roles, permissions) values(?,?,?,?)";
+        final String sql = "insert into sys_url_filter(name, url, method, roles, permissions) values(?,?,?,?,?)";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(new PreparedStatementCreator() {
@@ -35,6 +35,7 @@ public class UrlFilterDaoImpl implements UrlFilterDao {
                 int count = 1;
                 psst.setString(count++, urlFilter.getName());
                 psst.setString(count++, urlFilter.getUrl());
+                psst.setInt(count++, urlFilter.getMethod());
                 psst.setString(count++, urlFilter.getRoles());
                 psst.setString(count++, urlFilter.getPermissions());
                 return psst;
@@ -46,10 +47,10 @@ public class UrlFilterDaoImpl implements UrlFilterDao {
 
     @Override
     public UrlFilter updateUrlFilter(UrlFilter urlFilter) {
-        final String sql = "update sys_url_filter set name=?,url=?,roles=?,permissions=? where id=?";
+        final String sql = "update sys_url_filter set name=?,url=?,method=?,roles=?,permissions=? where id=?";
         jdbcTemplate.update(
                 sql,
-                urlFilter.getName(), urlFilter.getUrl(), urlFilter.getRoles(), urlFilter.getPermissions(), urlFilter.getId());
+                urlFilter.getName(), urlFilter.getUrl(), urlFilter.getMethod(), urlFilter.getRoles(), urlFilter.getPermissions(), urlFilter.getId());
         return urlFilter;
     }
 
@@ -61,7 +62,7 @@ public class UrlFilterDaoImpl implements UrlFilterDao {
 
     @Override
     public UrlFilter findOne(Long urlFilterId) {
-        final String sql = "select id, name, url, roles, permissions from sys_url_filter where id=?";
+        final String sql = "select id, name, url,method, roles, permissions from sys_url_filter where id=?";
         List<UrlFilter> urlFilterList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(UrlFilter.class), urlFilterId);
         if(urlFilterList.size() == 0) {
             return null;
@@ -70,8 +71,19 @@ public class UrlFilterDaoImpl implements UrlFilterDao {
     }
 
     @Override
+    public UrlFilter findOneByUrl(String url) {
+        final String sql = "select id, name, url,method, roles, permissions from sys_url_filter where url=?";
+        List<UrlFilter> urlFilterList = jdbcTemplate.query(sql, new BeanPropertyRowMapper(UrlFilter.class), url);
+        if(urlFilterList.size() == 0) {
+            return null;
+        }
+        return urlFilterList.get(0);
+    }
+
+
+    @Override
     public List<UrlFilter> findAll() {
-        final String sql = "select id, name, url, roles, permissions from sys_url_filter";
+        final String sql = "select id, name, url, method, roles, permissions from sys_url_filter";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper(UrlFilter.class));
     }
 

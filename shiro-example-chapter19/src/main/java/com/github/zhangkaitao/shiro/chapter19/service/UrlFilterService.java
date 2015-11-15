@@ -16,5 +16,6 @@ public interface UrlFilterService {
     public void deleteUrlFilter(Long urlFilterId);
 
     public UrlFilter findOne(Long urlFilterId);
+    UrlFilter findOneByUrl(String url);
     public List<UrlFilter> findAll();
 }

@@ -17,7 +17,7 @@
 <div class="ui-layout-west">
     功能菜单<br/>
     <c:forEach items="${menus}" var="m">
-        <a href="localhost:8080${m.url}" target="content">${m.name}</a><br/>
+        <a href="${pageContext.request.contextPath}/${m.url}" target="content">${m.name}</a><br/>
     </c:forEach>
 </div>
 

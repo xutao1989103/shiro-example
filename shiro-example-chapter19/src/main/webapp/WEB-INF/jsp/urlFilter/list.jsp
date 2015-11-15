@@ -21,6 +21,7 @@
         <tr>
             <th>名称</th>
             <th>URL</th>
+            <th>Method</th>
             <th>角色列表</th>
             <th>权限列表</th>
             <th>操作</th>
@@ -31,6 +32,7 @@
             <tr>
                 <td>${urlFilter.name}</td>
                 <td>${urlFilter.url}</td>
+                <td>${urlFilter.method}</td>
                 <td>${urlFilter.roles}</td>
                 <td>${urlFilter.permissions}</td>
                 <td>
